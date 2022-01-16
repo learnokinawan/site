@@ -1,2 +1,3 @@
-# site
-LearnOkinawan.com
+# Okinawan Dictionary Project
+
+[LearnOkinawan.com](https://learnokinawan.com/)
