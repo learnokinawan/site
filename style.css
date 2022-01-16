@@ -1,0 +1,78 @@
+/* globals */
+
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    font-family: 'Karla', sans-serif;
+}
+
+/* hr (horizontal line) */
+
+hr {
+   opacity: 0.6;
+   height: 10px;
+   margin-right: auto;
+   margin-left: auto;
+   background-color: #8dd5f2;
+   border: none;
+}
+
+/* header */
+
+.header a {
+  text-decoration: none;
+  color: #111111;
+  font-size: 1.8rem;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+}
+
+/* menu */
+
+.menu-items {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.menu-items li a {
+  font-size: 1.1rem;
+  padding: 0.5em 1em;
+  border-radius: 25px;
+}
+
+.menu-items li a:hover {
+  background-color: #f2727d;
+  color: #ffffff;
+}
+
+/* enable dark mode */
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #2A2B2E;
+    color: #fff;
+	}
+
+  hr {
+    background-color: #00E2FF;
+  }
+
+  .header a {
+    color: #fff;
+  }
+}
