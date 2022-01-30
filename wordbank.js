@@ -13,82 +13,46 @@ let wordBank = []
 let completeDictionaryHTML = ""
 let searchBank = []
 
-function audioClicked(image) {
-  if (image.src.indexOf("icons/volumeLight.png")>-1) {
-        image.src = "icons/volumeLightClicked.png";
-    } else {
-        image.src = "icons/volumeLight.png";
-    }
-}
 /*
 |--------------------------------------------------------------------------
-| Google Sheets API
+| Data Loading
 |--------------------------------------------------------------------------
 |
-| Read and update from Google sheet
+| Load data from wordbank csv
 |
 |
 */
 
-// Load Google API client
-function handleClientLoad() {
-  gapi.load('client:auth2', initClient);
-}
+function loadFile() {
+  $.get( "wordbank.csv", function(csvData) {
+        data = $.csv.toObjects(csvData);
 
-// Auhorize client and load data
-function initClient() {
-  var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
-  gapi.client.init({
-    'apiKey': config.API_TOKEN,
-    'clientId': config.CLIENT_ID,
-    'scope': SCOPE,
-    'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-  }).then(function() {
-    loadApiData();
-  });
-}
+        // convert to Word objects
+        var words = []
+        data.forEach((word, i) => {
+          words.push(Object.assign(new Word(word.romaji, word.hiragana, word.definition, word.author)))
+        });
 
-// Load data from Sheets API
-function loadApiData() {
-  var params = {
-    // The ID of the spreadsheet to retrieve data from.
-    spreadsheetId: config.SPREADSHEET_ID,
-    // The A1 notation of the values to retrieve.
-    range: '🚩 Official Filtered Word Bank'
-  };
+        // assign to word bank, sorted alphabetically
+        wordBank = words.sort(function(a, b) {
+          return a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+        })
 
-  var request = gapi.client.sheets.spreadsheets.values.get(params);
-  request.then(function(response) {
-    var reponseArray = response.result.values;
-    // remove first value
-    reponseArray.shift();
-
-    // convert to Word objects
-    var words = []
-    reponseArray.forEach((word, i) => {
-      words.push(Object.assign(new Word(word[1], word[2], word[3], word[6])))
+        // display html
+        completeDictionaryHTML = getHTMLForAllLetters()
+        $("#dictionary").html(completeDictionaryHTML);
     });
-
-    // assign to word bank, sorted alphabetically
-    wordBank = words.sort(function(a, b) {
-      return a.title.toLowerCase().localeCompare(b.title.toLowerCase())
-    })
-
-    // display html
-    completeDictionaryHTML = getHTMLForAllLetters()
-    $("#dictionary").html(completeDictionaryHTML);
-
-  }, function(reason) {
-    console.error('error: ' + reason.result.error.message);
-  });
 }
+
+
+
 
 /*
 |--------------------------------------------------------------------------
 | Data Parsing
 |--------------------------------------------------------------------------
 |
-| Read and update from Google sheet
+| Read and update from wordbank data
 |
 |
 */
@@ -196,4 +160,22 @@ class Word {
     this.definition = definition
     this.author = author
   }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Audio
+|--------------------------------------------------------------------------
+|
+|
+|
+|
+*/
+
+function audioClicked(image) {
+  if (image.src.indexOf("icons/volumeLight.png")>-1) {
+        image.src = "icons/volumeLightClicked.png";
+    } else {
+        image.src = "icons/volumeLight.png";
+    }
 }

@@ -3,11 +3,12 @@
 
   <head>
       <title>Learn Okinawan</title>
-      <script src='config.js'></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src='config.js'></script>
+      <script src="jquery-csv.js"></script>
       <script src="wordbank.js"></script>
       <script async defer src="https://apis.google.com/js/api.js"
-        onload="this.onload=function(){};handleClientLoad()"
+        onload="this.onload=function(){};loadFile()"
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
       </script>
       <link rel="stylesheet" href="style.css">
