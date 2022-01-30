@@ -13,6 +13,11 @@ let wordBank = []
 let completeDictionaryHTML = ""
 let searchBank = []
 
+
+$(document).ready(function(){
+  loadFile();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Data Loading
