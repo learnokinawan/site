@@ -21,8 +21,8 @@ function handleClientLoad() {
 function initClient() {
   var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
   gapi.client.init({
-    'apiKey': config.API_TOKEN,
-    'clientId': config.CLIENT_ID,
+    'apiKey': '', //config.API_TOKEN,
+    'clientId': '', //config.CLIENT_ID,
     'scope': SCOPE,
     'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
   }).then(function() {
@@ -34,7 +34,7 @@ function initClient() {
 function loadApiData() {
   var params = {
     // The ID of the spreadsheet to retrieve data from.
-    spreadsheetId: config.SPREADSHEET_ID,
+    spreadsheetId: '', //config.SPREADSHEET_ID,
     // The A1 notation of the values to retrieve.
     range: '🚩 Official Filtered Word Bank'
   };
