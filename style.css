@@ -244,4 +244,22 @@ li {
   .header a {
     color: #fff;
   }
+
+  .header {
+    background-color: #2A2B2E;
+  }
+
+  .alphabetContainer {
+    background-color: #2A2B2E;
+  }
+
+  .alphabet, .alphabet:link, .alphabet:visited {
+      color: white;
+      background-color: #2A2B2E;
+  }
+
+  .alphabet, .alphabet:hover {
+    color: white;
+    background-color: #f2727d;
+  }
 }
